@@ -3,6 +3,5 @@ virtualenv
 .nbgrader.log
 models
 *.pkl
-*.csv
 # Jupyter Notebook
 .ipynb_checkpoints
