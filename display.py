@@ -62,3 +62,29 @@ def show_exp(path_for_exp, high_loss_epoch_num, low_loss_epoch_num):
     print('*'*40)
     print('Samples of epoch with low G loss')
     display_audio_samples(low_loss_epoch, path=path_for_exp, batch_per_epoch=688, sample_interval=600)
+
+def play_4dat_audio(path_to_pickle_file):
+    with open(path_to_pickle_file, 'rb') as f:
+        x = pickle.load(f)
+
+    for sample in x:
+        A_name = sample['A'] # 'piano_piano_0.wav_5'
+        B_name = sample['B']
+        instrumentA = 'piano' if 'piano' in A_name else 'flute'
+        instrumentB = 'piano' if 'piano' in B_name else 'flute'
+
+        path_to_source_audio = './small_data_set/'
+
+        mag_A = np.load(path_to_source_audio+f'{instrumentA}/mag/'+A_name+'.npy')
+        phase_A = np.load(path_to_source_audio+f'{instrumentA}/phase/'+A_name+'.npy')
+        arr_A = build_audio(mag_A, phase_A)
+        mag_B = np.load(path_to_source_audio+f'{instrumentB}/mag/'+B_name+'.npy')
+        phase_B = np.load(path_to_source_audio+f'{instrumentB}/phase/'+B_name+'.npy')
+        arr_B = build_audio(mag_B, phase_B)
+
+        print('*'*20)
+        print(f'A: {instrumentA}, B: {instrumentB}')
+
+        play_sample(arr_A)
+        play_sample(arr_B)
+        play_sample(sample['arr'])
