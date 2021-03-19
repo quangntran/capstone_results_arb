@@ -5,3 +5,5 @@ models
 *.pkl
 # Jupyter Notebook
 .ipynb_checkpoints
+trash.ipynb
+generate_figure.ipynb
