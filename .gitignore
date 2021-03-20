@@ -7,4 +7,5 @@ models
 .ipynb_checkpoints
 trash.ipynb
 generate_figure.ipynb
+quang/
 !4dat/audio_samples/*
